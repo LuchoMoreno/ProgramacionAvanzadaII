@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+
+
+        function mostrar(value) 
+        {
+            console.log("El resultado es: " + value);
+        }
+
+
+        function sumarPromise(a, b) 
+        {
+
+            return new Promise((resolve, reject) => {
+
+                let suma;
+
+                setTimeout(() => {
+
+                    if (typeof a !== "number" || typeof b !== "number") {
+                        reject({ mensaje: "Error en parametro de SUMA" });
+                    }
+                    else {
+                        suma = a + b;
+                        console.log("La suma es: " + suma)
+                        resolve(suma);
+                    }
+                }, 1000);
+            });
+        }
+
+
+        function productoPromise(a, b) 
+        {
+
+            return new Promise((resolve, reject) => {
+
+                let producto;
+
+                setTimeout(() => {
+
+                    if (typeof a !== "number" || typeof b !== "number") {
+                        reject({ mensaje: "Error en parametro de PRODUCTO" });
+                    }
+                    else {
+                        producto = a * b;
+                        console.log("El producto es: " + producto)
+                        resolve(producto);
+                    }
+                }, 1000);
+            });
+        }
+
+
+
+        function cuadradoPromise(a) 
+        {
+
+            return new Promise((resolve, reject) => {
+
+                let cuadrado;
+
+                setTimeout(() => {
+
+                    if (typeof a !== "number") {
+                        reject({ mensaje: "Error en parametro de CUADRADO" });
+                    }
+                    else {
+                        cuadrado = a * a;
+                        console.log("El cuadrado es: " + cuadrado)
+                        resolve(cuadrado);
+                    }
+                }, 1000);
+            });
+        }
+
+
+
+        // A PARTIR DE ACÁ, LAS 3 COSAS MUESTRAN LO MISMO. PERO MAS O MENOS OPTIMO.
+
+
+        // MANERA 1
+        // FORMA COMPLETA, SIN RESUMIR
+
+        sumarPromise(4, 3)
+
+            .then((suma) => {
+
+                return cuadradoPromise(suma);
+
+            })
+
+            .then((cuadrado) => {
+
+                return productoPromise(cuadrado, 10);
+            })
+
+            .then((producto) => {
+
+                return mostrar(producto);
+            })
+
+            .catch((error) => {
+
+                console.log(error.mensaje);
+            })
+
+
+
+            
+        // MANERA 2
+        // FORMA COMPLETA, RESUMIDA. Se pueden obviar cosas cuando hay un solo parametro y son funciones anonimas. (ejemplo, suma)
+
+        sumarPromise(4, 3)
+
+            .then(suma => cuadradoPromise(suma) )
+
+            .then(cuadrado => productoPromise(cuadrado, 10) )
+
+            .then(producto => mostrar(producto) )
+
+            .catch(error => console.log(error.mensaje) )
+
+
+
+
+        // MANERA 3
+        // Por ultimo, operaciones ASYNC + AWAIT. Los awat se usa para que no queden
+        // .then en el codigo, como en los casos anteriores.
+
+
+        async function realizarOperaciones()
+        {
+            let sumar = await sumarPromise (4,3);
+            let cuad = await cuadradoPromise (sumar);
+            let prod = await productoPromise (cuad, 10);
+            mostrar(prod);
+        }
+
+        realizarOperaciones();
+
+
+
+
+
+    </script>
+
+
+
+
+    <!--
+
+    <script>
+
+        function sumar (a,b)
+        {
+            let suma = a + b;
+            console.log("La suma es: " + suma)
+            return suma;
+        }
+
+        function cuadrado (a)
+        {
+            let quad = a * a;
+            console.log("El cuadrado es: " + quad)
+            return quad;
+        }
+
+        function producto (a , b)
+        {
+            let prod = a * b;
+            console.log("El producto es: " + prod)
+            return prod;
+        }
+
+        function mostrar(value)
+        {
+            console.log("El resultado es: "  + value);
+        }
+
+
+        //let suma = sumar(4,3);
+        //let quad = cuadrado(suma);
+        //let prod = producto(quad, 10);
+
+
+        // """CUANDO TENGAS EL RESULTADO DE A + B, PASASELO A LA FUNCION CALLBACK.""""
+        function sumarAsync(a, b, callback)
+        {
+                let suma;
+
+                setTimeout(() => {
+                    
+                    suma = a + b;
+
+                    callback(suma);
+
+                }, 2000);
+
+        }
+        
+
+        console.log("fin");
+
+        // NO LE PONGO PARENTESIS, PORQUE UNA FUNCION SIN PARENTESIS, ES UN PUNTERO A LA FUNCION QUE YA ESTA EN EL SISTEMA. 
+        sumarAsync(4,3, mostrar);
+
+
+
+
+    </script>
+
+
+
+
+-->
+
+
+
+
+
+    <!--
+
+
+    
+        function mostrar(value)
+        {
+            console.log("El resultado es: "  + value);
+        }
+
+
+        //let suma = sumar(4,3);
+        //let quad = cuadrado(suma);
+        //let prod = producto(quad, 10);
+
+
+        // """CUANDO TENGAS EL RESULTADO DE A + B, PASASELO A LA FUNCION CALLBACK.""""
+        function sumarAsync(a, b, callback)
+        {
+                let suma;
+
+                setTimeout(() => {
+                    
+                    suma = a + b;
+                    console.log("La suma es: " + suma)
+                    callback(suma, productoAsync);
+
+                }, 2000);
+
+        }
+
+
+        function cuadradoAsync(a, callback)
+        {
+                let cuadrado;
+
+                setTimeout(() => {
+                    
+                    cuadrado = a * a;
+                    console.log("El cuadrado es: " + cuadrado)
+                    callback(cuadrado, 10, mostrar);
+
+                }, 4000);
+
+        }
+
+
+        function productoAsync(a, b, callback)
+        {
+                let producto;
+
+                setTimeout(() => {
+                    
+                    producto = a * b;
+                    console.log("El producto es: " + producto)
+                    callback(producto);
+
+                }, 4000);
+
+        }
+
+
+        // NO LE PONGO PARENTESIS, PORQUE UNA FUNCION SIN PARENTESIS, ES UN PUNTERO A LA FUNCION QUE YA ESTA EN EL SISTEMA. 
+        sumarAsync(4,3, cuadradoAsync);
+
+
+        
+
+
+
+    </script>
+
+
+
+
+
+-->
+
+
+</body>
+
+</html>

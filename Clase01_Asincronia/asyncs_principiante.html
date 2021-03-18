@@ -1,0 +1,55 @@
+<script>
+
+    function sumar (a,b)
+    {
+        let suma = a + b;
+        console.log("La suma es: " + suma)
+        return suma;
+    }
+
+    function cuadrado (a)
+    {
+        let quad = a * a;
+        console.log("El cuadrado es: " + quad)
+        return quad;
+    }
+
+    function producto (a , b)
+    {
+        let prod = a * b;
+        console.log("El producto es: " + prod)
+        return prod;
+    }
+
+    function mostrar(value)
+    {
+        console.log("El resultado es: "  + value);
+    }
+
+
+
+    // """CUANDO TENGAS EL RESULTADO DE A + B, PASASELO A LA FUNCION CALLBACK.""""
+    function sumarAsync(a, b, callback)
+    {
+            let suma;
+
+            setTimeout(() => {
+                
+                suma = a + b;
+
+                callback(suma);
+
+            }, 2000);
+
+    }
+    
+
+    console.log("fin");
+
+    // NO LE PONGO PARENTESIS, le estoy pasando el nombre de la funcion nada más. El nombre de la funcion es un puntero (una referencia) que guarda la direccion de memoria de donde esta guardada esa funcion en el segmento de codigo.
+    sumarAsync(4,3, mostrar);
+
+
+
+
+</script>

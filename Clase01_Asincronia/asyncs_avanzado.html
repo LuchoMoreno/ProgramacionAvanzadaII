@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+    <script>
+
+
+        function mostrar(value) {
+            console.log("El resultado es: " + value);
+        }
+
+
+        // """CUANDO TENGAS EL RESULTADO DE A + B, PASASELO A LA FUNCION CALLBACK.""""
+        function sumarAsync(a, b, callback) {
+            let suma;
+
+            setTimeout(() => {
+
+                suma = a + b;
+                console.log("La suma es: " + suma)
+
+                callback(suma, (a, b, callback) => {
+                    let producto;
+
+                    setTimeout(() => {
+
+                        producto = a * b;
+                        console.log("El producto es: " + producto)
+                        callback(producto);
+
+                    }, 4000);
+
+                });
+
+            }, 2000);
+
+        }
+
+
+        // NO LE PONGO PARENTESIS, PORQUE UNA FUNCION SIN PARENTESIS, ES UN PUNTERO A LA FUNCION QUE YA ESTA EN EL SISTEMA. 
+        sumarAsync(4, 3, function cuadradoAsync(a, callback) {
+            let cuadrado;
+
+            setTimeout(() => {
+
+                cuadrado = a * a;
+                console.log("El cuadrado es: " + cuadrado)
+                callback(cuadrado, 10, mostrar);
+
+            }, 4000);
+
+        });
+
+
+
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>
