@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+
+    <script>
+
+    //let no cuelga del scope global, es temporal.
+
+    var nombre = "lucho";
+    var edad = 21;
+
+const persona = {
+    nombre: "Juan",
+    edad:30,
+    saludar:function()
+    {
+        console.log(`Hola, me llamo ${this.nombre} y tengo ${this.edad} años`);
+    },
+
+    sumar:function(a,b)
+    {
+        return a+b;
+    } 
+}
+
+const persona2 = {
+    nombre: "Juan cito 2",
+    edad:3000,
+    saludar:function()
+    {
+        console.log(`Hola, me llamo ${this.nombre} y tengo ${this.edad} años`);
+    },
+
+    sumar:function(a,b)
+    {
+        return a+b;
+    } 
+}
+
+
+
+/*
+console.log(persona.sumar(4,5));
+const calcular = persona.sumar;
+console.log(calcular(4,5));
+*/
+
+////////
+
+
+persona.saludar("Hola", "Mundo", 34);
+const saludo = persona.saludar;
+saludo();
+
+// cuando pongo call, significa que el primer parametro va a ser el contexto, quien quiero que sea this para esa invocacion de saludo.
+saludo.call(persona2, "chau", "mundo", "cruel");
+saludo.apply(persona2);
+
+
+// lo que cambia es que si yo tengo una funcion que recibe parametros 
+
+
+const saludopro = persona.saludar.bind(persona2);
+saludo();
+
+
+    </script>
+
+
+    
+</body>
+</html>
