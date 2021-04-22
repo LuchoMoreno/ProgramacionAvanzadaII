@@ -1,0 +1,44 @@
+Componentes de clase -> ClassComponent.
+Componentes funcionales -> Stabless Functional Component. Solo puede recibir datos a traves de props y mostrarlos. 
+		Hooks- Se encargan de mantener el estado de los componentes funcionales.
+
+Tienen distinto ciclo de vida. 
+
+
+Componente en MAYUSCULA.
+
+
+
+
+const Persona = {nombre:"Jose", edad:40}
+
+let {nombre,edad} = persona;
+Y automaticamente, se llenan los atributos nombre y edad, con los datos de persona.
+
+
+
+const arr = [1,2,3,4]
+
+let x = arr[0];
+let y = arr[1];
+let z = arr[2];
+let a = arr[3];
+
+console.log(x,y,z,a);
+
+
+let [x,y,z,a] = arr;
+
+console.log(x,y,z,a);
+
+
+let [x,y,z,a...g] = arr; // el 2 va a X, 2 Y, 3 Z, 4A y el resto, todo lo que quede, va a ir a g como un array.
+console.log(x,y,z,a,g);
+
+
+
+const arr = [2,3,5,6,6,5,4]
+c¡onst arr2 = [1,1,1,1]
+
+const arr3 = arr.concat(arr2);
+consty arr4 = [...arr, ...arr2];
