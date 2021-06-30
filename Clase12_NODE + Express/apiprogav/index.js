@@ -30,7 +30,8 @@ const { handlerNotFound } = require("./middlewares")
 
 // CORS
 // npm , i, cors. Para que le podamos pegar desde index.html o desde otros lugares, comno cualquier api.
-//const cors = require("cors");
+
+const cors = require("cors");
 
 
 const logger = (req, res, next ) => {
@@ -42,13 +43,10 @@ const logger = (req, res, next ) => {
 
 let personas = [
     {id:1, nombre:"Lucho", edad:"20"},
-    {id:2, nombre:"Analia", edad:"25"},
+    {id:2, nombre:"Analiaa", edad:"25"},
     {id:3, nombre:"Josecito", edad:"30"},
     {id:4, nombre:"Martin", edad:"35"},
 ];
-
-// cuando uso cors ya no funciona
-//app.use(cors);
 
 
 // MIDLEWARE, es algo que no detiene el flujo de 
@@ -61,6 +59,9 @@ app.use(express.json());
 
 // se ejecuta cuando realizo cualquier petición.
 app.use(logger);
+
+
+app.use(cors());
 
 
 app.get("/", (req, res) => {
@@ -160,9 +161,6 @@ app.put("/api/personas/:id", (req, res) => {
     res.status(400).end();
 
 });
-
-
-
 
 
 app.listen(PORT, () => {

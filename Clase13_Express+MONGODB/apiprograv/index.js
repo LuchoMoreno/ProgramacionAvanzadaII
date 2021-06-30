@@ -42,9 +42,7 @@ const logger = (req, res, next ) => {
 }
 
 
-
-// cuando uso cors ya no funciona
-//app.use(cors);
+app.use(cors());
 
 
 // MIDLEWARE, es algo que no detiene el flujo de 
