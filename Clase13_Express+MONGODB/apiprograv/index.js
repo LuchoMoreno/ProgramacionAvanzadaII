@@ -32,7 +32,8 @@ const app = express();
 
 // CORS
 // npm , i, cors. Para que le podamos pegar desde index.html o desde otros lugares, comno cualquier api.
-//const cors = require("cors");
+
+const cors = require("cors");
 
 
 const logger = (req, res, next ) => {
