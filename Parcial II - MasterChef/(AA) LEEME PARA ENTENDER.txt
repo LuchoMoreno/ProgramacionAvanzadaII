@@ -1,0 +1,7 @@
+En el back, escribis por terminal:
+npm install
+npm run api
+
+En el front, escribis por terminal:
+npm install
+npm start
